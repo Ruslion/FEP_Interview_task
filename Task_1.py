@@ -52,12 +52,6 @@ def generate_game():
 
     return stamps
 
-
-game_stamps = generate_game()
-
-pprint(game_stamps[-300:])
-
-
 def get_score(game_stamps, offset):
     '''
         Takes list of game's stamps and time offset for which returns the scores for the home and away teams.
@@ -69,15 +63,19 @@ def get_score(game_stamps, offset):
     left = 0
     right = len(game_stamps) - 1
     
-    while left < right:
+    while left <= right:
         mid = (left + right) // 2
-        if game_stamps[mid]["offset"] < offset:
+        current_offset = game_stamps[mid]["offset"]
+        if current_offset == offset:
+            break
+        if current_offset < offset:
             left = mid + 1
         else:
             right = mid - 1
-    return game_stamps[right]["score"]["home"], game_stamps[right]["score"]["away"]
+    return game_stamps[mid]["score"]["home"], game_stamps[mid]["score"]["away"]
 
-# Some testing
-for i in range(99000, 100000, 100):
-    home, away = get_score(game_stamps, i)
-    print(f"Offset: {i}, Score: Home:{home} Away:{away}")
+if __name__ == "__main__":
+    game_stamps = generate_game()
+    pprint(game_stamps)
+
+
