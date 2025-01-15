@@ -75,7 +75,7 @@ def get_score(game_stamps, offset):
             left = mid + 1
         else:
             right = mid - 1
-    return game_stamps[right]["score"]["home"], game_stamps[left]["score"]["away"]
+    return game_stamps[right]["score"]["home"], game_stamps[right]["score"]["away"]
 
 # Some testing
 for i in range(99000, 100000, 100):
