@@ -58,4 +58,17 @@ class Test_get_score(unittest.TestCase):
         home, away = task_1.get_score(self.test_game_stamps, 28)
         self.assertEqual(home, 7)
         self.assertEqual(away, 14)
+    
+    def test_end_of_game(self):
+        """Test score at the end of the game"""
+        home, away = task_1.get_score(self.test_game_stamps, 42)
+        self.assertEqual(home, 1)
+        self.assertEqual(away, 20)
+    
+    def test_offset_out_of_range(self):
+        """Test when offset is out of range"""
+        with self.assertRaises(ValueError):
+            task_1.get_score(self.test_game_stamps, 43)
+        with self.assertRaises(ValueError):
+            task_1.get_score(self.test_game_stamps, -1)
 

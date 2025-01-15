@@ -57,6 +57,8 @@ def get_score(game_stamps, offset):
         Takes list of game's stamps and time offset for which returns the scores for the home and away teams.
         Please pay attention to that for some offsets the game_stamps list may not contain scores.
     '''
+    if offset < 0 or offset > game_stamps[-1]["offset"]:
+        raise ValueError("Offset is out of range")
     # Binary search will help to find the offset in the list of game_stamps.
     # Returns data from the closest offset
 
